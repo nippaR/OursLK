@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Button as ShadcnButton } from '@/components/ui/button';
 
 interface ButtonProps {
   label: string;
@@ -11,30 +12,35 @@ interface ButtonProps {
 }
 
 export function Button({ label, onClick, href, variant = 'primary', className = '' }: ButtonProps) {
-  const baseClass = 'px-8 py-3 rounded-lg font-semibold transition-all duration-300';
-  const variantClass = 
-    variant === 'primary' 
-      ? 'bg-[#ff6b35] text-white hover:bg-[#ff8555] hover:shadow-lg hover:shadow-[#ff6b35]/50' 
-      : 'border-2 border-[#ff6b35] text-[#ff6b35] hover:bg-[#ff6b35] hover:text-white';
-
-  const element = (
-    <motion.button
-      className={`${baseClass} ${variantClass} ${className}`}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      onClick={onClick}
-    >
-      {label}
-    </motion.button>
-  );
+  const variantClass =
+    variant === 'primary'
+      ? 'border border-[#ff6b35]/70 bg-[#ff6b35] text-white shadow-[0_16px_40px_rgba(255,107,53,0.28)] hover:bg-[#ff8555]'
+      : 'border border-[#ff6b35]/35 bg-white/5 text-white hover:bg-white/10 hover:border-[#ff6b35]/70';
 
   if (href) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer">
-        {element}
-      </a>
+      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+        <ShadcnButton
+          asChild
+          className={`h-11 rounded-full px-6 text-sm font-semibold tracking-[0.01em] transition-all duration-300 ${variantClass} ${className}`}
+        >
+          <a href={href} target="_blank" rel="noopener noreferrer">
+            {label}
+          </a>
+        </ShadcnButton>
+      </motion.div>
     );
   }
 
-  return element;
+  return (
+    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+      <ShadcnButton
+        type="button"
+        onClick={onClick}
+        className={`h-11 rounded-full px-6 text-sm font-semibold tracking-[0.01em] transition-all duration-300 ${variantClass} ${className}`}
+      >
+        {label}
+      </ShadcnButton>
+    </motion.div>
+  );
 }

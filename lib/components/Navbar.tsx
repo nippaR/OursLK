@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Button } from '@/components/ui/button';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,11 +18,10 @@ export function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0f0f0f]/80 backdrop-blur-md border-b border-[#ff6b35]/20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Logo */}
           <motion.div
-            className="text-2xl font-bold bg-gradient-to-r from-[#ff6b35] to-[#ffd166] bg-clip-text text-transparent"
+            className="shrink-0 text-2xl font-bold bg-gradient-to-r from-[#ff6b35] to-[#ffd166] bg-clip-text text-transparent"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
           >
@@ -29,12 +29,12 @@ export function Navbar() {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex gap-8">
+          <div className="hidden items-center gap-2 md:flex">
             {navLinks.map((link, idx) => (
               <motion.a
                 key={idx}
                 href={link.href}
-                className="text-white hover:text-[#ff6b35] transition-colors duration-300"
+                className="rounded-full px-4 py-2 text-sm font-medium text-white/80 transition-colors duration-300 hover:text-[#ff6b35]"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.05 }}
@@ -46,13 +46,14 @@ export function Navbar() {
 
           {/* Mobile Menu Button */}
           <motion.button
-            className="md:hidden w-8 h-8 flex flex-col justify-between"
+            className="flex h-10 w-10 flex-col justify-center gap-1.5 rounded-full border border-[#ff6b35]/25 bg-white/5 p-2 md:hidden"
             onClick={() => setIsOpen(!isOpen)}
             whileTap={{ scale: 0.95 }}
+            aria-label="Toggle navigation"
           >
             <motion.div
               className="w-full h-0.5 bg-[#ff6b35]"
-              animate={isOpen ? { rotate: 45, y: 11 } : { rotate: 0, y: 0 }}
+              animate={isOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
             />
             <motion.div
               className="w-full h-0.5 bg-[#ff6b35]"
@@ -60,35 +61,44 @@ export function Navbar() {
             />
             <motion.div
               className="w-full h-0.5 bg-[#ff6b35]"
-              animate={isOpen ? { rotate: -45, y: -11 } : { rotate: 0, y: 0 }}
+              animate={isOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
             />
           </motion.button>
-        </div>
       </div>
 
       {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 bg-[#0f0f0f] z-40 mt-16 flex flex-col items-center justify-start pt-20"
+            className="fixed inset-x-0 top-16 z-40 border-b border-[#ff6b35]/15 bg-[#0f0f0f]/95 px-4 pb-6 pt-4 backdrop-blur-xl md:hidden"
             initial={{ opacity: 0, y: -100 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -100 }}
             transition={{ duration: 0.3 }}
           >
-            {navLinks.map((link, idx) => (
-              <motion.a
-                key={idx}
-                href={link.href}
-                className="text-2xl text-white py-4 hover:text-[#ff6b35] transition-colors"
-                onClick={() => setIsOpen(false)}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1 }}
+            <div className="mx-auto flex w-full max-w-6xl flex-col gap-2">
+              {navLinks.map((link, idx) => (
+                <motion.a
+                  key={idx}
+                  href={link.href}
+                  className="rounded-2xl border border-white/5 bg-white/[0.03] px-4 py-3 text-base font-medium text-white/85 transition-colors hover:text-[#ff6b35]"
+                  onClick={() => setIsOpen(false)}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.08 }}
+                >
+                  {link.label}
+                </motion.a>
+              ))}
+              <Button
+                asChild
+                className="mt-2 h-11 rounded-full border border-[#ff6b35]/70 bg-[#ff6b35] text-white hover:bg-[#ff8555]"
               >
-                {link.label}
-              </motion.a>
-            ))}
+                <a href="#contact" onClick={() => setIsOpen(false)}>
+                  Start a Project
+                </a>
+              </Button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

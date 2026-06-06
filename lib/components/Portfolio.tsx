@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
 
 export function Portfolio() {
   const projects = [
@@ -110,13 +111,14 @@ export function Portfolio() {
                   whileHover={{ opacity: 1 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <motion.button
-                    className="px-6 py-3 bg-[#ff6b35] text-white rounded-lg font-semibold"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    View Project
-                  </motion.button>
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <Button
+                      type="button"
+                      className="h-11 rounded-full border border-[#ff6b35]/70 bg-[#ff6b35] px-6 text-white hover:bg-[#ff8555]"
+                    >
+                      View Project
+                    </Button>
+                  </motion.div>
                 </motion.div>
               </div>
             </motion.div>

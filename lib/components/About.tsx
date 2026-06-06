@@ -40,22 +40,20 @@ export function About() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          {/* Header */}
           <motion.div variants={itemVariants} className="text-center space-y-4">
             <h2 className="text-4xl md:text-5xl font-bold">
               About <span className="text-[#ff6b35]">Ours.lk</span>
             </h2>
             <p className="text-gray-400 text-lg max-w-3xl mx-auto">
-              We're a team of passionate web designers and developers dedicated to helping Sri Lankan businesses build a strong online presence with modern, affordable, and high-quality websites.
+              We are a team of passionate web designers and developers dedicated to helping Sri Lankan businesses build a strong online presence with modern, affordable, and high-quality websites.
             </p>
           </motion.div>
 
-          {/* Mission & Values */}
           <motion.div variants={itemVariants} className="grid md:grid-cols-2 gap-8 mt-12">
             <div className="space-y-4">
               <h3 className="text-2xl font-bold text-[#ffd166]">Our Mission</h3>
               <p className="text-gray-300 leading-relaxed">
-                To empower Sri Lankan businesses of all sizes—from restaurants to freelancers, from tuition teachers to travel companies—by providing accessible, modern web solutions that help them reach more customers and grow their business online.
+                To empower Sri Lankan businesses of all sizes, from restaurants to freelancers and from tuition teachers to travel companies, by providing accessible, modern web solutions that help them reach more customers and grow their business online.
               </p>
             </div>
             <div className="space-y-4">
@@ -66,7 +64,6 @@ export function About() {
             </div>
           </motion.div>
 
-          {/* Features Grid */}
           <div className="grid md:grid-cols-4 gap-6 mt-12">
             {features.map((feature, idx) => (
               <motion.div
