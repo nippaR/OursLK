@@ -18,59 +18,58 @@ export function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0f0f0f]/80 backdrop-blur-md border-b border-[#ff6b35]/20">
-      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          {/* Logo */}
+      <div className="mx-auto flex h-20 w-full max-w-8xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <motion.div
+          className="text-2xl font-bold bg-gradient-to-r from-[#ff6b35] to-[#ffd166] bg-clip-text text-transparent"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+        >
+          Ours.lk
+        </motion.div>
+
+        {/* Desktop Navigation */}
+        <div className="ml-auto hidden items-center justify-end gap-4 lg:gap-6 md:flex">
+          {navLinks.map((link, idx) => (
+            <motion.a
+              key={idx}
+              href={link.href}
+              className="rounded-full px-4 py-2 text-sm font-medium tracking-[0.01em] text-white/80 transition-colors duration-300 hover:text-[#ff6b35]"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.05 }}
+            >
+              {link.label}
+            </motion.a>
+          ))}
+        </div>
+
+        {/* Mobile Menu Button */}
+        <motion.button
+          className="ml-auto flex h-10 w-10 flex-col justify-center gap-1.5 rounded-full border border-[#ff6b35]/25 bg-white/5 p-2 md:hidden"
+          onClick={() => setIsOpen(!isOpen)}
+          whileTap={{ scale: 0.95 }}
+          aria-label="Toggle navigation"
+        >
           <motion.div
-            className="shrink-0 text-2xl font-bold bg-gradient-to-r from-[#ff6b35] to-[#ffd166] bg-clip-text text-transparent"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-          >
-            Ours.lk
-          </motion.div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden items-center gap-2 md:flex">
-            {navLinks.map((link, idx) => (
-              <motion.a
-                key={idx}
-                href={link.href}
-                className="rounded-full px-4 py-2 text-sm font-medium text-white/80 transition-colors duration-300 hover:text-[#ff6b35]"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.05 }}
-              >
-                {link.label}
-              </motion.a>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <motion.button
-            className="flex h-10 w-10 flex-col justify-center gap-1.5 rounded-full border border-[#ff6b35]/25 bg-white/5 p-2 md:hidden"
-            onClick={() => setIsOpen(!isOpen)}
-            whileTap={{ scale: 0.95 }}
-            aria-label="Toggle navigation"
-          >
-            <motion.div
-              className="w-full h-0.5 bg-[#ff6b35]"
-              animate={isOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-            />
-            <motion.div
-              className="w-full h-0.5 bg-[#ff6b35]"
-              animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-            />
-            <motion.div
-              className="w-full h-0.5 bg-[#ff6b35]"
-              animate={isOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-            />
-          </motion.button>
+            className="w-full h-0.5 bg-[#ff6b35]"
+            animate={isOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+          />
+          <motion.div
+            className="w-full h-0.5 bg-[#ff6b35]"
+            animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
+          />
+          <motion.div
+            className="w-full h-0.5 bg-[#ff6b35]"
+            animate={isOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+          />
+        </motion.button>
       </div>
 
       {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-x-0 top-16 z-40 border-b border-[#ff6b35]/15 bg-[#0f0f0f]/95 px-4 pb-6 pt-4 backdrop-blur-xl md:hidden"
+            className="fixed inset-x-0 top-20 z-40 border-b border-[#ff6b35]/15 bg-[#0f0f0f]/95 px-4 pb-6 pt-4 backdrop-blur-xl md:hidden"
             initial={{ opacity: 0, y: -100 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -100 }}

@@ -1,38 +1,46 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import {
+  BriefcaseBusiness,
+  Building2,
+  MessageSquareMore,
+  RefreshCw,
+  Utensils,
+  UsersRound,
+} from 'lucide-react';
 
 export function Services() {
   const services = [
     {
       title: 'Business Websites',
       description: 'Professional websites for shops, offices, and service businesses',
-      icon: '🌐',
+      icon: Building2,
     },
     {
       title: 'Restaurant Websites',
       description: 'Online menus, reservations, and ordering systems for restaurants',
-      icon: '🍽️',
+      icon: Utensils,
     },
     {
       title: 'Portfolio Websites',
       description: 'Showcase your work and skills with a stunning online portfolio',
-      icon: '🎨',
+      icon: BriefcaseBusiness,
     },
     {
       title: 'Community Websites',
       description: 'Websites for NGOs, community groups, and organisations',
-      icon: '🤝',
+      icon: UsersRound,
     },
     {
       title: 'Website Redesign',
       description: 'Update your old website with modern design and technology',
-      icon: '✨',
+      icon: RefreshCw,
     },
     {
       title: 'Contact & Integration',
       description: 'WhatsApp integration, contact forms, and messaging systems',
-      icon: '📱',
+      icon: MessageSquareMore,
     },
   ];
 
@@ -81,24 +89,28 @@ export function Services() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
-          {services.map((service, idx) => (
-            <motion.div
-              key={idx}
-              variants={cardVariants}
-              className="group p-8 rounded-xl border border-[#ff6b35]/20 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] hover:border-[#ff6b35]/60 transition-all duration-300"
-              whileHover={{
-                y: -10,
-                boxShadow: '0 20px 40px rgba(255, 107, 53, 0.2)',
-              }}
-            >
-              <div className="text-5xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
-                {service.icon}
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-3">{service.title}</h3>
-              <p className="text-gray-400 leading-relaxed">{service.description}</p>
-              <div className="mt-4 w-12 h-1 bg-gradient-to-r from-[#ff6b35] to-[#ffd166] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-            </motion.div>
-          ))}
+          {services.map((service) => {
+            const Icon = service.icon;
+
+            return (
+              <motion.div
+                key={service.title}
+                variants={cardVariants}
+                className="group p-8 rounded-xl border border-[#ff6b35]/20 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] hover:border-[#ff6b35]/60 transition-all duration-300"
+                whileHover={{
+                  y: -10,
+                  boxShadow: '0 20px 40px rgba(255, 107, 53, 0.2)',
+                }}
+              >
+                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-[#ff6b35]/30 bg-[#ff6b35]/10 text-[#ff6b35] transition-transform duration-300 group-hover:scale-110">
+                  <Icon size={30} strokeWidth={1.8} aria-hidden="true" />
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-3">{service.title}</h3>
+                <p className="text-gray-400 leading-relaxed">{service.description}</p>
+                <div className="mt-4 w-12 h-1 bg-gradient-to-r from-[#ff6b35] to-[#ffd166] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
     </section>

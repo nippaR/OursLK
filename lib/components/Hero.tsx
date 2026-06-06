@@ -29,48 +29,51 @@ export function Hero() {
 
   const heroCards = [
     {
-      src: '/HeroSection/images.jpg',
+      src: '/HeroSection/OIP.webp',
       alt: 'E-commerce website UI kit preview',
       title: 'E-commerce',
       subtitle: 'Modern storefront layouts',
+      cardClassName: 'h-64 max-w-xs md:h-[340px] md:max-w-[300px]',
     },
     {
-      src: '/HeroSection/Hero2.jpg',
+      src: '/HeroSection/web-design-concepts-tubik-studio-1.png',
       alt: 'Service business website preview',
       title: 'Service Business',
       subtitle: 'Clean booking-focused design',
+      cardClassName: 'h-64 max-w-xs md:h-[340px] md:max-w-[300px]',
     },
     {
       src: '/HeroSection/hero3.png',
       alt: 'Fitness landing page preview',
       title: 'Landing Page',
       subtitle: 'Bold conversion-oriented hero',
+      cardClassName: 'h-64 max-w-xs md:h-[340px] md:max-w-[300px]',
     },
   ];
 
   return (
     <section
       id="home"
-      className="relative flex min-h-screen scroll-mt-24 items-center overflow-hidden pt-24 sm:pt-28"
+      className="relative overflow-hidden scroll-mt-24 pt-32 sm:pt-36"
     >
       <AnimatedBlob />
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-16 sm:px-6 lg:px-8 lg:pb-24">
+      <div className="relative z-10 mx-auto flex min-h-[calc(100vh-8rem)] w-full max-w-6xl flex-col items-center px-4 pb-16 sm:px-6 lg:px-8 lg:pb-24">
         <motion.div
-          className="mx-auto flex max-w-4xl flex-col items-center space-y-5 text-center md:space-y-7"
+          className="mx-auto flex w-full max-w-4xl flex-col items-center justify-center text-center"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           {/* Tagline */}
-          <motion.div variants={itemVariants}>
+          <motion.div variants={itemVariants} className="mt-5 text-center">
             <p className="text-[#ff6b35] font-semibold text-lg md:text-xl">Welcome to Ours.lk</p>
           </motion.div>
 
           {/* Main Heading */}
           <motion.h1
             variants={itemVariants}
-            className="max-w-5xl text-4xl font-bold leading-[0.95] sm:text-5xl md:text-7xl"
+            className="mt-5 max-w-5xl text-center text-4xl font-bold leading-[1] sm:text-5xl md:text-7xl"
           >
             <span className="block text-white">Websites for</span>
             <span className="block bg-gradient-to-r from-[#ff6b35] via-[#ffd166] to-[#ff6b35] bg-clip-text text-transparent">
@@ -81,7 +84,7 @@ export function Hero() {
           {/* Subtitle */}
           <motion.p
             variants={itemVariants}
-            className="max-w-3xl text-base leading-8 text-gray-300 sm:text-lg md:text-xl"
+            className="mt-5 max-w-3xl text-center text-base leading-8 text-gray-300 sm:text-lg md:text-xl"
           >
             Ours.lk builds modern, affordable, and mobile-friendly websites for shops, restaurants, service businesses, freelancers, and Sri Lankan community organisations. Transform your online presence today.
           </motion.p>
@@ -89,7 +92,7 @@ export function Hero() {
           {/* Buttons */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col items-center justify-center gap-3 pt-2 sm:flex-row"
+            className="mt-5 flex w-full flex-col items-center justify-center gap-3 pt-2 text-center sm:flex-row"
           >
             <Button
               label="Start a Project"
@@ -99,7 +102,7 @@ export function Hero() {
             <ShadcnButton
               type="button"
               variant="outline"
-              className="h-11 rounded-full border-[#ff6b35]/35 bg-white/5 px-6 text-sm font-semibold text-white hover:bg-white/10 hover:text-white"
+              className="h-11 rounded-full border border-[#ff6b35]/70 bg-white/5 px-6 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(255,107,53,0.12)] hover:bg-white/10 hover:text-white"
               onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
             >
               View Services
@@ -109,17 +112,17 @@ export function Hero() {
 
         {/* Hero Image/Mockup Area */}
         <motion.div
-          className="mt-14 md:mt-18"
+          className="mx-auto mt-14 flex w-full max-w-6xl flex-col items-center md:mt-16"
           variants={itemVariants}
           initial="hidden"
           animate="visible"
           transition={{ duration: 1, delay: 1.2 }}
         >
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6 perspective">
+          <div className="grid w-full grid-cols-1 justify-items-center gap-5 md:grid-cols-3 md:gap-6 perspective">
             {heroCards.map((card, idx) => (
               <motion.div
                 key={card.src}
-                className="group relative h-72 overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/5 shadow-2xl shadow-black/30 backdrop-blur-sm md:h-[420px]"
+                className={`group relative w-full self-center overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/5 shadow-2xl shadow-black/30 backdrop-blur-sm ${card.cardClassName}`}
                 whileHover={{ y: -10, boxShadow: '0 24px 50px rgba(255, 107, 53, 0.2)' }}
                 transition={{ duration: 0.3 }}
               >
@@ -144,23 +147,23 @@ export function Hero() {
               </motion.div>
             ))}
           </div>
+
+          {/* Scroll Indicator */}
+          <motion.div
+            className="mt-2 flex justify-center"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <div className="flex h-10 w-6 justify-center rounded-full border-2 border-[#ff6b35]">
+              <motion.div
+                className="mt-2 h-2 w-1 rounded-full bg-[#ff6b35]"
+                animate={{ y: [0, 5, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+            </div>
+          </motion.div>
         </motion.div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        <div className="w-6 h-10 border-2 border-[#ff6b35] rounded-full flex justify-center">
-          <motion.div
-            className="w-1 h-2 bg-[#ff6b35] rounded-full mt-2"
-            animate={{ y: [0, 5, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          />
-        </div>
-      </motion.div>
     </section>
   );
 }

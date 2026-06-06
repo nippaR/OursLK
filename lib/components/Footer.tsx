@@ -1,6 +1,42 @@
 'use client';
 
+import type { SVGProps } from 'react';
 import { motion } from 'framer-motion';
+import { ArrowUp } from 'lucide-react';
+
+function FacebookIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M13.5 22v-9h3l.45-3.5H13.5V7.26c0-1.01.28-1.7 1.73-1.7H17V2.43c-.31-.04-1.37-.13-2.61-.13-2.59 0-4.36 1.58-4.36 4.48V9.5H7.1V13h2.93v9h3.47Z" />
+    </svg>
+  );
+}
+
+function InstagramIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" {...props}>
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function LinkedinIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M6.5 8.1H3.2V21h3.3V8.1ZM4.85 3A1.91 1.91 0 1 0 4.84 6.82 1.91 1.91 0 0 0 4.85 3ZM21 13.6c0-3.89-2.08-5.7-4.85-5.7a4.18 4.18 0 0 0-3.79 2.08V8.1H9.05V21h3.31v-6.39c0-1.68.32-3.31 2.4-3.31 2.05 0 2.08 1.92 2.08 3.42V21H21v-7.4Z" />
+    </svg>
+  );
+}
+
+function YoutubeIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M23.5 6.2a3.01 3.01 0 0 0-2.12-2.13C19.5 3.56 12 3.56 12 3.56s-7.5 0-9.38.51A3.01 3.01 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3.01 3.01 0 0 0 2.12 2.13c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.01 3.01 0 0 0 2.12-2.13A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.6 15.62V8.38L15.86 12 9.6 15.62Z" />
+    </svg>
+  );
+}
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -20,11 +56,18 @@ export function Footer() {
     ],
     Connect: [
       { label: 'Email', href: 'mailto:hello@ours.lk' },
-      { label: 'WhatsApp', href: 'https://wa.me/94XXXXXXXXX' },
+      { label: 'WhatsApp', href: 'https://wa.me/94756506423' },
       { label: 'Contact Form', href: '#contact' },
       { label: 'Schedule Call', href: '#contact' },
     ],
   };
+
+  const socialLinks = [
+    { label: 'Facebook', href: 'https://www.facebook.com/', icon: FacebookIcon },
+    { label: 'Instagram', href: 'https://www.instagram.com/', icon: InstagramIcon },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/', icon: LinkedinIcon },
+    { label: 'YouTube', href: 'https://www.youtube.com/', icon: YoutubeIcon },
+  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -64,6 +107,26 @@ export function Footer() {
             <p className="text-gray-400 text-sm leading-relaxed">
               Building modern, affordable, and mobile-friendly websites for Sri Lankan businesses and communities.
             </p>
+            <div className="mt-6 flex items-center gap-3">
+              {socialLinks.map((social) => {
+                const Icon = social.icon;
+
+                return (
+                  <motion.a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Visit Ours.lk on ${social.label}`}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-[#ff6b35]/25 bg-white/[0.03] text-gray-400 transition-colors duration-300 hover:border-[#ff6b35]/70 hover:bg-[#ff6b35]/10 hover:text-[#ff6b35]"
+                    whileHover={{ y: -3, scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Icon className="h-[18px] w-[18px]" aria-hidden="true" />
+                  </motion.a>
+                );
+              })}
+            </div>
           </motion.div>
 
           {/* Links Sections */}
@@ -71,8 +134,8 @@ export function Footer() {
             <motion.div key={title} variants={itemVariants}>
               <h4 className="text-white font-semibold mb-4">{title}</h4>
               <ul className="space-y-2">
-                {items.map((item, idx) => (
-                  <li key={idx}>
+                {items.map((item) => (
+                  <li key={item.label}>
                     <a
                       href={item.href}
                       className="text-gray-400 hover:text-[#ff6b35] transition-colors duration-300"
@@ -111,13 +174,14 @@ export function Footer() {
         <motion.button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-[#ff6b35] text-white flex items-center justify-center hover:bg-[#ff8555] transition-colors duration-300 shadow-lg"
+          aria-label="Back to top"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           initial={{ opacity: 0, scale: 0 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: false, amount: 0.5 }}
         >
-          ↑
+          <ArrowUp size={20} aria-hidden="true" />
         </motion.button>
       </div>
     </footer>

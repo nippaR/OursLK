@@ -84,7 +84,7 @@ export function Contact() {
           {/* Quick Contact Options */}
           <motion.a
             variants={itemVariants}
-            href="https://wa.me/94XXXXXXXXX"
+            href="https://wa.me/94756506423"
             target="_blank"
             rel="noopener noreferrer"
             className="p-6 rounded-xl border border-[#ff6b35]/30 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] hover:border-[#ff6b35]/60 transition-all text-center group"
@@ -210,7 +210,7 @@ export function Contact() {
             </motion.button>
             <Button
               label="Chat on WhatsApp"
-              href="https://wa.me/94XXXXXXXXX"
+              href="https://wa.me/94756506423"
               variant="secondary"
               className="flex-1"
             />

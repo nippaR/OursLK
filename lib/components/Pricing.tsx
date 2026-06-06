@@ -8,6 +8,8 @@ export function Pricing() {
     {
       title: 'Starter Website',
       description: 'Best for small businesses that need a simple online presence',
+      price: 'LKR 12,000',
+      priceNote: '+ hosting charges',
       features: [
         'Up to 5 pages',
         'Mobile responsive',
@@ -21,9 +23,13 @@ export function Pricing() {
     {
       title: 'Standard Website',
       description: 'Best for growing businesses that need multiple pages and contact features',
+      price: 'LKR 35,000',
+      priceNote: '+ free hosting',
       features: [
         'Up to 12 pages',
         'Mobile responsive',
+        'E-commerce ready',
+        'Payment gateway integration',
         'Contact form & WhatsApp',
         'SEO optimized',
         'SSL certificate',
@@ -35,14 +41,17 @@ export function Pricing() {
     {
       title: 'Premium Website',
       description: 'Best for businesses that need advanced design, portfolio, and support',
+      price: 'LKR 50,000',
+      priceNote: '+ free service',
       features: [
         'Unlimited pages',
         'Mobile responsive',
+        'E-commerce ready',
+        'Payment gateway integration',
         'Contact & WhatsApp integration',
         'Advanced SEO',
         'SSL certificate',
         'Blog/Portfolio section',
-        'E-commerce ready',
         'Priority support',
         'Custom design',
       ],
@@ -122,9 +131,9 @@ export function Pricing() {
                 {/* Price */}
                 <div className="py-6 border-y border-[#ff6b35]/20">
                   <p className="text-gray-300 text-center font-semibold">
-                    <span className="text-3xl font-bold text-[#ff6b35]">Custom</span>
+                    <span className="text-3xl font-bold text-[#ff6b35]">{pkg.price}</span>
                   </p>
-                  <p className="text-gray-400 text-center text-sm mt-1">Contact for pricing</p>
+                  <p className="text-gray-400 text-center text-sm mt-1">{pkg.priceNote}</p>
                 </div>
 
                 {/* Features */}
