@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Button as ShadcnButton } from '@/components/ui/button';
 import { Button } from './Button';
@@ -33,6 +34,7 @@ export function Hero() {
       alt: 'E-commerce website UI kit preview',
       title: 'E-commerce',
       subtitle: 'Modern storefront layouts',
+      href: 'https://nithagi-flowers.vercel.app/',
       cardClassName: 'h-64 max-w-xs md:h-[340px] md:max-w-[300px]',
     },
     {
@@ -119,33 +121,51 @@ export function Hero() {
           transition={{ duration: 1, delay: 1.2 }}
         >
           <div className="grid w-full grid-cols-1 justify-items-center gap-5 md:grid-cols-3 md:gap-6 perspective">
-            {heroCards.map((card, idx) => (
-              <motion.div
-                key={card.src}
-                className={`group relative w-full self-center overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/5 shadow-2xl shadow-black/30 backdrop-blur-sm ${card.cardClassName}`}
-                whileHover={{ y: -10, boxShadow: '0 24px 50px rgba(255, 107, 53, 0.2)' }}
-                transition={{ duration: 0.3 }}
-              >
-                <Image
-                  src={card.src}
-                  alt={card.alt}
-                  fill
-                  priority={idx === 0}
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover object-top transition duration-500 group-hover:scale-[1.03]"
-                />
+            {heroCards.map((card, idx) => {
+              const cardContent = (
+                <motion.div
+                  className={`group relative w-full self-center overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/5 shadow-2xl shadow-black/30 backdrop-blur-sm ${card.cardClassName}`}
+                  whileHover={{ y: -10, boxShadow: '0 24px 50px rgba(255, 107, 53, 0.2)' }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Image
+                    src={card.src}
+                    alt={card.alt}
+                    fill
+                    priority={idx === 0}
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover object-top transition duration-500 group-hover:scale-[1.03]"
+                  />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
-                  <div className="inline-flex items-center rounded-full border border-white/15 bg-black/40 px-3 py-1 text-xs font-medium tracking-wide text-white/80 backdrop-blur-md">
-                    {card.title}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
+                    <div className="inline-flex items-center rounded-full border border-white/15 bg-black/40 px-3 py-1 text-xs font-medium tracking-wide text-white/80 backdrop-blur-md">
+                      {card.title}
+                    </div>
+                    <p className="mt-3 max-w-[16rem] text-sm text-white/70">
+                      {card.subtitle}
+                    </p>
                   </div>
-                  <p className="mt-3 max-w-[16rem] text-sm text-white/70">
-                    {card.subtitle}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+
+              if (card.href) {
+                return (
+                  <Link
+                    key={card.src}
+                    href={card.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Open ${card.title} website`}
+                    className="block w-full"
+                  >
+                    {cardContent}
+                  </Link>
+                );
+              }
+
+              return <div key={card.src} className="w-full">{cardContent}</div>;
+            })}
           </div>
 
           {/* Scroll Indicator */}

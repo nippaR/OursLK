@@ -1,10 +1,21 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
+type PortfolioProject = {
+  title: string;
+  category: string;
+  color: string;
+  href?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+};
+
 export function Portfolio() {
-  const projects = [
+  const projects: PortfolioProject[] = [
     {
       title: 'Sri Lankan Restaurant Website',
       category: 'Restaurant',
@@ -26,9 +37,12 @@ export function Portfolio() {
       color: 'from-[#264653] to-[#ff6b35]',
     },
     {
-      title: 'Personal Portfolio Website',
-      category: 'Portfolio',
+      title: 'Nithagi Flowers Website',
+      category: 'E-commerce',
       color: 'from-[#ff6b35] to-[#ef476f]',
+      href: 'https://nithagi-flowers.vercel.app/',
+      imageSrc: '/HeroSection/Portfolio6.png',
+      imageAlt: 'Nithagi Flowers website preview',
     },
   ];
 
@@ -97,11 +111,23 @@ export function Portfolio() {
                 </div>
 
                 {/* Image Placeholder */}
-                <div className="w-full h-40 bg-gradient-to-br from-white/10 to-white/5 rounded-lg flex items-center justify-center text-gray-400 text-sm transform group-hover:scale-110 transition-transform duration-300">
-                  <div className="text-center">
-                    <div className="text-4xl mb-2">🌐</div>
-                    <p>Website Preview</p>
-                  </div>
+                <div className="relative h-40 w-full overflow-hidden rounded-lg bg-gradient-to-br from-white/10 to-white/5 text-gray-400 text-sm transform transition-transform duration-300 group-hover:scale-110">
+                  {project.imageSrc ? (
+                    <Image
+                      src={project.imageSrc}
+                      alt={project.imageAlt ?? `${project.title} preview`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover object-top"
+                    />
+                  ) : (
+                    <div className="flex h-full items-center justify-center">
+                      <div className="text-center">
+                        <div className="mb-2 text-4xl">🌐</div>
+                        <p>Website Preview</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Hover overlay */}
@@ -112,12 +138,23 @@ export function Portfolio() {
                   transition={{ duration: 0.3 }}
                 >
                   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button
-                      type="button"
-                      className="h-11 rounded-full border border-[#ff6b35]/70 bg-[#ff6b35] px-6 text-white hover:bg-[#ff8555]"
-                    >
-                      View Project
-                    </Button>
+                    {project.href ? (
+                      <Button
+                        asChild
+                        className="h-11 rounded-full border border-[#ff6b35]/70 bg-[#ff6b35] px-6 text-white hover:bg-[#ff8555]"
+                      >
+                        <Link href={project.href} target="_blank" rel="noopener noreferrer">
+                          View Project
+                        </Link>
+                      </Button>
+                    ) : (
+                      <Button
+                        type="button"
+                        className="h-11 rounded-full border border-[#ff6b35]/70 bg-[#ff6b35] px-6 text-white hover:bg-[#ff8555]"
+                      >
+                        View Project
+                      </Button>
+                    )}
                   </motion.div>
                 </motion.div>
               </div>
