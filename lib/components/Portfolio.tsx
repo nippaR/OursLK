@@ -20,6 +20,8 @@ export function Portfolio() {
       title: 'Sri Lankan Restaurant Website',
       category: 'Restaurant',
       color: 'from-[#ff6b35] to-[#ffd166]',
+      // Added link to internal route /restaurant for modern restaurant website demo
+      href: '/restaurant',
     },
     {
       title: 'Cleaning Service Website',
@@ -143,6 +145,7 @@ export function Portfolio() {
                         asChild
                         className="h-11 rounded-full border border-[#ff6b35]/70 bg-[#ff6b35] px-6 text-white hover:bg-[#ff8555]"
                       >
+                        {/* Open all project links (including internal previews) in a new tab */}
                         <Link href={project.href} target="_blank" rel="noopener noreferrer">
                           View Project
                         </Link>
