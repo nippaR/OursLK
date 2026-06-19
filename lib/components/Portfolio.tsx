@@ -17,11 +17,12 @@ type PortfolioProject = {
 export function Portfolio() {
   const projects: PortfolioProject[] = [
     {
-      title: 'Sri Lankan Restaurant Website',
+      title: 'Restaurant Website',
       category: 'Restaurant',
       color: 'from-[#ff6b35] to-[#ffd166]',
-      // Added link to internal route /restaurant for modern restaurant website demo
       href: '/restaurant',
+      imageSrc: '/HeroSection/Resturant_app.png',
+      imageAlt: 'Restaurant website preview',
     },
     {
       title: 'Cleaning Service Website',
